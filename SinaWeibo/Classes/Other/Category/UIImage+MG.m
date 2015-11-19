@@ -11,6 +11,10 @@
 @implementation UIImage (MG)
 +(UIImage*) imageWithStretchable:(NSString*)imageName{
     UIImage* image = [UIImage imageNamed:imageName];
-    return [image stretchableImageWithLeftCapWidth:image.size.width*0.5 topCapHeight:image.size.height*0.5];
+    return [self imageWithStretchable:imageName leftCapWidth:0.5 topCapHeight:0.5];
+}
++(UIImage*) imageWithStretchable:(NSString*)imageName leftCapWidth:(CGFloat)left topCapHeight:(CGFloat)top{
+    UIImage* image = [UIImage imageNamed:imageName];
+    return [image stretchableImageWithLeftCapWidth:image.size.width*left topCapHeight:image.size.height*top];
 }
 @end

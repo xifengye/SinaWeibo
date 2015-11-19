@@ -51,6 +51,7 @@
 @property(nonatomic,assign)long long ID;
 @property(nonatomic,copy)NSString* name;
 @property(nonatomic,copy)NSString* profile_image_url;
+@property(nonatomic,assign)int mbrank;
 //@property(nonatomic,copy)NSString* screen_name;
 //@property(nonatomic,assign)int followers_count;
 //@property(nonatomic,assign)int statuses_count;

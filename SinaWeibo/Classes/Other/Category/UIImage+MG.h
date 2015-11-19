@@ -10,4 +10,5 @@
 
 @interface UIImage (MG)
 +(UIImage*) imageWithStretchable:(NSString*)imageName;
++(UIImage*) imageWithStretchable:(NSString*)imageName leftCapWidth:(CGFloat)left topCapHeight:(CGFloat)top;
 @end

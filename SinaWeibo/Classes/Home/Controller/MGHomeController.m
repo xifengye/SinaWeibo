@@ -12,12 +12,14 @@
 #import "AFNetworking.h"
 #import "MGAccountTool.h"
 #import "UIImageView+WebCache.h"
-#import "WeiboItem.h"
+#import "Status.h"
 #import "MJExtension.h"
+#import "StatusFrame.h"
+#import "MGWeiboCell.h"
 
 
 @interface MGHomeController ()
-@property(nonatomic,strong)NSArray* statues;
+@property(nonatomic,strong)NSArray* statuesFrame;
 @end
 
 @implementation MGHomeController
@@ -26,6 +28,9 @@
     [super viewDidLoad];
     [self setupNavBar];
     [self loadWeibo];
+    self.tableView.backgroundColor = CellBackgroundColor;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.contentInset = UIEdgeInsetsMake(TableCellBorder, 0, TableCellBorder, 0);
 }
 
 
@@ -46,7 +51,14 @@
         }
         self.statues = mutableArr;
          */
-        self.statues = [WeiboItem objectArrayWithKeyValuesArray:arr];
+        NSArray* statusArray = [Status objectArrayWithKeyValuesArray:arr];
+        NSMutableArray* statusFrameArray = [NSMutableArray array];
+        for(Status* status in statusArray){
+            StatusFrame* statusFrame = [[StatusFrame alloc] init];
+            statusFrame.status = status;
+            [statusFrameArray addObject:statusFrame];
+        }
+        self.statuesFrame = statusFrameArray;
         [self.tableView reloadData];
     } failure:^(AFHTTPRequestOperation * operation , NSError * error) {
         NSLog(@"error   %@",error);
@@ -71,6 +83,11 @@
 
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    StatusFrame* statusFrame = self.statuesFrame[indexPath.row];
+    return statusFrame.cellHeight;
+}
+
 -(void)leftBarButtonItemClicked:(UIButton*)button{
     NSLog(@"leftBarButtonItemClicked");
 }
@@ -90,22 +107,15 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return self.statues.count;
+    return self.statuesFrame.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString* ID = @"HomeCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
     
-    if(cell==nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
-    }
-    WeiboItem* status = self.statues[indexPath.row];
-    cell.textLabel.text = status.text;
-    cell.detailTextLabel.text = status.user.name;
-//    cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:status[@"user"][@"profile_image_url"]]]];
-    [cell.imageView setImageWithURL:[NSURL URLWithString:status.user.profile_image_url] placeholderImage:[UIImage imageNamed:@"near"]];
+    MGWeiboCell* cell = [MGWeiboCell cellWithTableView:tableView];
+    StatusFrame* statusFrame = self.statuesFrame[indexPath.row];
+    cell.statusFrame = statusFrame;
     return cell;
 }
 
