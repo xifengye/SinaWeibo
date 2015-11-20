@@ -19,18 +19,46 @@
 
 
 @interface MGHomeController ()
-@property(nonatomic,strong)NSArray* statuesFrame;
+@property(nonatomic,strong)NSMutableArray* statuesFrame;
+@property(nonatomic,strong)UIRefreshControl* refreshView;
 @end
 
 @implementation MGHomeController
 
+
+-(NSMutableArray *)statuesFrame{
+    if(_statuesFrame==nil){
+        _statuesFrame = [NSMutableArray array];
+    }
+    return _statuesFrame;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavBar];
-    [self loadWeibo];
+    [self setupTableView];
+    [self setupRefreshController];
+    
+}
+
+-(void)setupTableView{
     self.tableView.backgroundColor = CellBackgroundColor;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tableView.contentInset = UIEdgeInsetsMake(TableCellBorder, 0, TableCellBorder, 0);
+}
+
+-(void)setupRefreshController{
+    UIRefreshControl* refreshView = [[UIRefreshControl alloc]init];
+    [self.tableView addSubview:refreshView];
+    self.refreshView = refreshView;
+    [refreshView addTarget:self action:@selector(tableViewRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.refreshView beginRefreshing];
+    [self tableViewRefresh:refreshView];
+}
+
+-(void)tableViewRefresh:(UIRefreshControl*)refreshView{
+    NSLog(@"refresh");
+    [self loadWeibo];
 }
 
 
@@ -39,18 +67,15 @@
     NSString* url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
     NSMutableDictionary* params = [NSMutableDictionary dictionary];
     params[@"access_token"] = account.access_token;
+    params[@"count"] = @20;
+    if(_statuesFrame.count>0){
+        StatusFrame* s = self.statuesFrame[0];
+        params[@"since_id"]=s.status.idstr;
+    }
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation * operation, id response) {
         NSLog(@"success   %@",response);
         NSArray* arr = response[@"statuses"];
-        /*
-        NSMutableArray* mutableArr = [NSMutableArray array];
-        for(int i=0;i<arr.count;i++){
-            WeiboItem* item = [WeiboItem objectWithKeyValues:[arr objectAtIndex:i]];//[WeiboItem weiboWithDict:[arr objectAtIndex:i ]];
-            [mutableArr addObject:item];
-        }
-        self.statues = mutableArr;
-         */
         NSArray* statusArray = [Status objectArrayWithKeyValuesArray:arr];
         NSMutableArray* statusFrameArray = [NSMutableArray array];
         for(Status* status in statusArray){
@@ -58,10 +83,21 @@
             statusFrame.status = status;
             [statusFrameArray addObject:statusFrame];
         }
-        self.statuesFrame = statusFrameArray;
+        NSMutableArray* temp = [NSMutableArray array];
+        [temp addObjectsFromArray:statusFrameArray];
+        if(self.statuesFrame.count>0){
+            [temp addObjectsFromArray:self.statuesFrame];
+        }
+        self.statuesFrame = temp;
         [self.tableView reloadData];
+        if([self.refreshView isRefreshing]){
+            [self.refreshView endRefreshing];
+        }
     } failure:^(AFHTTPRequestOperation * operation , NSError * error) {
         NSLog(@"error   %@",error);
+        if([self.refreshView isRefreshing]){
+            [self.refreshView endRefreshing];
+        }
     }];
 }
 

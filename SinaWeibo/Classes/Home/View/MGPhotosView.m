@@ -38,7 +38,7 @@
     for (int i = 0; i<count; i++) {
         // 替换为中等尺寸图片
         Photo* photo = _photos[i];
-        NSString *url = [photo.thumbnail_pic stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"large"];
+        NSString *url = [photo.thumbnail_pic stringByReplacingOccurrencesOfString:@"thumbnail" withString:@"bmiddle"];
         MJPhoto *photoView = [[MJPhoto alloc] init];
         photoView.url = [NSURL URLWithString:url]; // 图片路径
         photoView.srcImageView = self.subviews[i]; // 来源于哪个UIImageView

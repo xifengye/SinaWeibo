@@ -48,7 +48,7 @@
 //+(instancetype)weiboWithDict:(NSDictionary*)dict;
 //-(instancetype)initWithDict:(NSDictionary*)dict;
 @property(nonatomic,copy)NSString* created_at;//创建时间
-@property(nonatomic,assign)long long ID;
+@property(nonatomic,copy)NSString* idstr;
 @property(nonatomic,copy)NSString* text;
 @property(nonatomic,copy)NSString* source;
 //@property(nonatomic,copy)NSString* thumbnail_pic;
