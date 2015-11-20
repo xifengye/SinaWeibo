@@ -17,8 +17,8 @@
 @property (copy, nonatomic) SDWebImageDownloaderCompletedBlock completedBlock;
 @property (copy, nonatomic) void (^cancelBlock)();
 
-@property (assign, nonatomic, getter = isExecuting) BOOL executing;
-@property (assign, nonatomic, getter = isFinished) BOOL finished;
+@property (assign, nonatomic, getter = isExecuting) BOOL isexecuting;
+@property (assign, nonatomic, getter = isFinished) BOOL isfinished;
 @property (assign, nonatomic) NSInteger expectedSize;
 @property (strong, nonatomic) NSMutableData *imageData;
 @property (strong, nonatomic) NSURLConnection *connection;
@@ -43,8 +43,8 @@
         _progressBlock = [progressBlock copy];
         _completedBlock = [completedBlock copy];
         _cancelBlock = [cancelBlock copy];
-        self.executing = NO;
-        self.finished = NO;
+        _isexecuting = NO;
+        _isfinished = NO;
         _expectedSize = 0;
         responseFromCached = YES; // Initially wrong until `connection:willCacheResponse:` is called or not called
     }
@@ -54,7 +54,7 @@
 - (void)start {
     @synchronized (self) {
         if (self.isCancelled) {
-            self.finished = YES;
+            self.isfinished = YES;
             [self reset];
             return;
         }
@@ -75,7 +75,7 @@
         }
 #endif
 
-        self.executing = YES;
+        self.isexecuting = YES;
         self.connection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self startImmediately:NO];
         self.thread = [NSThread currentThread];
     }
@@ -145,16 +145,16 @@
 
         // As we cancelled the connection, its callback won't be called and thus won't
         // maintain the isFinished and isExecuting flags.
-        if (self.isExecuting) self.executing = NO;
-        if (!self.isFinished) self.finished = YES;
+        if (self.isExecuting) self.isexecuting = NO;
+        if (!self.isFinished) self.isfinished = YES;
     }
 
     [self reset];
 }
 
 - (void)done {
-    self.finished = YES;
-    self.executing = NO;
+    self.isfinished = YES;
+    self.isexecuting = NO;
     [self reset];
 }
 
@@ -169,13 +169,13 @@
 
 - (void)setFinished:(BOOL)finished {
     [self willChangeValueForKey:@"isFinished"];
-    finished = finished;
+    _isfinished = finished;
     [self didChangeValueForKey:@"isFinished"];
 }
 
 - (void)setExecuting:(BOOL)executing {
     [self willChangeValueForKey:@"isExecuting"];
-    executing = executing;
+    _isexecuting = executing;
     [self didChangeValueForKey:@"isExecuting"];
 }
 

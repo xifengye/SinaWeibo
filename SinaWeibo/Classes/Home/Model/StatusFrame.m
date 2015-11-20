@@ -7,17 +7,12 @@
 //
 
 #import "StatusFrame.h"
+#import "MGPhotosView.h"
 
-
-
-
-
-@interface StatusFrame()
-
-
-@end
 
 @implementation StatusFrame
+
+
 - (void)setStatus:(Status *)status{
     _status = status;
     
@@ -51,13 +46,18 @@
     CGFloat contentY = MAX(CGRectGetMaxY(_profileViewF),CGRectGetMaxY(_timeLabelF))+StatusCellMargin;
     _contentLabelF = CGRectMake(contentX, contentY, contentW, contentSize.height);
     
-    if(status.thumbnail_pic){
-        CGFloat photoW = 80;
-        CGFloat photoH = 80;
-        CGFloat photoX = contentX;
-        CGFloat photoY = CGRectGetMaxY(_contentLabelF)+StatusCellMargin;
-        _photoViewF = CGRectMake(photoX, photoY, photoW, photoH);
+    CGFloat statusPhotoX = contentX;
+    CGFloat statusPhotoY = CGRectGetMaxY(_contentLabelF)+StatusCellMargin;
+    //原创发图
+    int picUlrCount = status.pic_urls.count;
+    if(picUlrCount>9){
+        picUlrCount = 9;
     }
+    if(picUlrCount>0){
+        CGSize statsPhotoSize = [MGPhotosView photosViewSizeWithPhotosCount:picUlrCount];
+        _statusPhotoF = CGRectMake(statusPhotoX, statusPhotoY, statsPhotoSize.width, statsPhotoSize.height);
+    }
+    
     
     //被转发
     if(status.retweeted_status){
@@ -79,23 +79,30 @@
         _retweetContentLabelF = CGRectMake(retweetContentX, retweetContentY, retweetContentW, retweetContentSize.height);
         
         
-        if(status.retweeted_status.thumbnail_pic){
-            CGFloat retweetPhotoW = 80;
-            CGFloat retweetPhotoH = 80;
-            CGFloat retweetPhotoX = retweetContentX;
-            CGFloat retweetPhotoY = CGRectGetMaxY(_retweetContentLabelF)+StatusCellMargin;
-            _retweetPhotoViewF = CGRectMake(retweetPhotoX, retweetPhotoY, retweetPhotoW, retweetPhotoH);
-            
-            retweetTopH = CGRectGetMaxY(_retweetPhotoViewF)+StatusCellMargin;
-        }else{
-           retweetTopH = CGRectGetMaxY(_retweetContentLabelF)+StatusCellMargin;
-        }
+        
+        CGFloat retweetStatusPhotoW = retweetContentW;
+        CGFloat retweetStatusPhotoH = 0;
+        CGFloat retweetStatusPhotoX = retweetContentX;
+        CGFloat retweetStatusPhotoY = CGRectGetMaxY(_retweetContentLabelF)+StatusCellMargin;
 
+        //转发发图
+        int retweetPicUlrCount = status.retweeted_status.pic_urls.count;
+        if(retweetPicUlrCount>9){
+            retweetPicUlrCount = 9;
+        }
+        if(retweetPicUlrCount>0){
+            CGSize retweetStatsPhotoSize = [MGPhotosView photosViewSizeWithPhotosCount:retweetPicUlrCount];
+            _retweetStatusPhotoF = CGRectMake(retweetStatusPhotoX, retweetStatusPhotoY, retweetStatsPhotoSize.width, retweetStatsPhotoSize.height);
+            retweetTopH = CGRectGetMaxY(_retweetStatusPhotoF)+StatusCellMargin;
+        }else{
+            retweetTopH = CGRectGetMaxY(_retweetContentLabelF)+StatusCellMargin;
+        }
+  
         _retweetTopViewF = CGRectMake(retweetTopX, retweetTopY, retweetTopW, retweetTopH);
         topViewH = CGRectGetMaxY(_retweetTopViewF)+StatusCellMargin;
     }else{
-        if(status.thumbnail_pic){
-            topViewH = CGRectGetMaxY(_photoViewF)+StatusCellMargin;
+        if(status.pic_urls.count>0){
+            topViewH = CGRectGetMaxY(_statusPhotoF)+StatusCellMargin;
         }else{
             topViewH = CGRectGetMaxY(_contentLabelF)+StatusCellMargin;
         }
@@ -107,7 +114,7 @@
     
     
     CGFloat toolBarW = topViewW;
-    CGFloat toolBarH = 50;
+    CGFloat toolBarH = 40;
     CGFloat toolBarX = topViewX;
     CGFloat toolBarY = CGRectGetMaxY(_topViewF);
     _statusToolBarF = CGRectMake(toolBarX, toolBarY, toolBarW, toolBarH);

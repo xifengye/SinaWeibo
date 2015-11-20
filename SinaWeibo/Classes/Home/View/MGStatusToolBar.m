@@ -8,6 +8,8 @@
 
 #import "MGStatusToolBar.h"
 #import "UIImage+MG.h"
+#import "StatusFrame.h"
+#import "Status.h"
 
 #define TAG_SEPARATOR   1001
 
@@ -37,6 +39,35 @@
         self.userInteractionEnabled = true;
         self.image = [UIImage imageWithStretchable:@"timeline_card_bottom_background"];
         self.highlightedImage = [UIImage imageWithStretchable:@"timeline_card_bottom_background_highlighted"];
+        
+        
+        UIButton* repostsBtn = [[UIButton alloc]init];
+        [repostsBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        repostsBtn.contentMode = UIViewContentModeCenter;
+        repostsBtn.font = StatusToolBarFont;
+        [repostsBtn setBackgroundImage:[UIImage imageWithStretchable:@"timeline_card_leftbottom_highlighted"] forState:UIControlStateHighlighted];
+        [repostsBtn setImage:[UIImage imageNamed:@"timeline_icon_retweet"] forState:UIControlStateNormal];
+        [repostsBtn.imageView setImage:[UIImage imageNamed:@"timeline_icon_retweet"]];
+        [self addToolItem:repostsBtn];
+        self.repostsBtn = repostsBtn;
+        
+        UIButton* commentsBtn = [[UIButton alloc]init];
+        [commentsBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        commentsBtn.font = StatusToolBarFont;
+        [commentsBtn setBackgroundImage:[UIImage imageWithStretchable:@"timeline_card_middlebottom_highlighted"] forState:UIControlStateHighlighted];
+        [commentsBtn setImage:[UIImage imageNamed:@"timeline_icon_comment"]  forState:UIControlStateNormal];
+        [commentsBtn setTitle:@"评论" forState:UIControlStateNormal];
+        [self addToolItem:commentsBtn];
+        self.commentsBtn = commentsBtn;
+        
+        UIButton* attitudesBtn = [[UIButton alloc]init];
+        [attitudesBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        attitudesBtn.font = StatusToolBarFont;
+        [attitudesBtn setBackgroundImage:[UIImage imageWithStretchable:@"timeline_card_rightbottom_highlighted"] forState:UIControlStateHighlighted];
+        [attitudesBtn setImage:[UIImage imageNamed:@"timeline_icon_unlike"] forState:UIControlStateNormal];
+        [attitudesBtn setTitle:@"赞" forState:UIControlStateNormal];
+        [self addToolItem:attitudesBtn];
+        self.attitudesBtn = attitudesBtn;
     }
     return self;
 }
@@ -80,5 +111,27 @@
     }
     [self addSubview:view];
     [self.items addObject:view];
+}
+
+-(void)setStatusFrame:(StatusFrame *)statusFrame{
+    Status* status = statusFrame.status;
+    if(status.reposts_count>0){
+        [self.repostsBtn setTitle:[NSString stringWithFormat:@"%d",status.reposts_count] forState:UIControlStateNormal];
+    }else{
+        [self.repostsBtn setTitle:@"转发" forState:UIControlStateNormal];
+    }
+    
+    if(status.comments_count>0){
+        [self.commentsBtn setTitle:[NSString stringWithFormat:@"%d",status.comments_count] forState:UIControlStateNormal];
+    }else{
+        [self.commentsBtn setTitle:@"评论" forState:UIControlStateNormal];
+    }
+    
+    if(status.attitudes_count>0){
+        [self.attitudesBtn setTitle:[NSString stringWithFormat:@"%d",status.attitudes_count] forState:UIControlStateNormal];
+    }else{
+        [self.attitudesBtn setTitle:@"赞" forState:UIControlStateNormal];
+    }
+
 }
 @end

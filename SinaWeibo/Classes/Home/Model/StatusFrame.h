@@ -13,6 +13,10 @@
 #define TableCellBorder 3
 #define StatusCellMargin  6
 #define StatusProfileWH 40
+#define StatusPhotoW  120
+#define StatusPhotoH  150
+#define StatusNinePhotoMaxWH  90
+#define StatusNinePhotoMargin  6
 
 #define StatusNameFont [UIFont systemFontOfSize:16]
 #define StatusContentFont [UIFont systemFontOfSize:14]
@@ -27,7 +31,7 @@
 @property(nonatomic,assign,readonly)CGRect  topViewF;
 @property(nonatomic,assign,readonly)CGRect   profileViewF;
 @property(nonatomic,assign,readonly)CGRect   vipViewF;
-@property(nonatomic,assign,readonly)CGRect   photoViewF;
+@property(nonatomic,assign,readonly)CGRect   statusPhotoF;
 
 @property(nonatomic,assign,readonly)CGRect   nameLabelF;
 @property(nonatomic,assign,readonly)CGRect   contentLabelF;
@@ -37,7 +41,7 @@
 @property(nonatomic,assign,readonly)CGRect   retweetTopViewF;
 @property(nonatomic,assign,readonly)CGRect   retweetNameLabelF;
 @property(nonatomic,assign,readonly)CGRect   retweetContentLabelF;
-@property(nonatomic,assign,readonly)CGRect   retweetPhotoViewF;
+@property(nonatomic,assign,readonly)CGRect   retweetStatusPhotoF;
 
 @property(nonatomic,assign,readonly)CGRect   statusToolBarF;
 @property(nonatomic,assign,readonly)CGRect repostsBtnF;

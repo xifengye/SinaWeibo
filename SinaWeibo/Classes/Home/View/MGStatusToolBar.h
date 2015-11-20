@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StatusFrame.h"
 
 @interface MGStatusToolBar : UIImageView
 -(void)addToolItem:(UIView*)view;
+@property (nonatomic,strong)StatusFrame* statusFrame;
+@property(nonatomic,weak)UIButton* repostsBtn;
+@property(nonatomic,weak)UIButton* commentsBtn;
+@property(nonatomic,weak)UIButton* attitudesBtn;
 @end
