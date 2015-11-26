@@ -89,6 +89,12 @@
 		FCA08D651BFDC21B00B11230 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA08D641BFDC21B00B11230 /* Photo.m */; };
 		FCA08D681BFDC3CF00B11230 /* MGPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA08D671BFDC3CF00B11230 /* MGPhotoView.m */; };
 		FCB3279A1BFD6D3A003C169A /* MGStatusView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB327991BFD6D3A003C169A /* MGStatusView.m */; };
+		FCCD84331C0539BB0023CCC1 /* MGComposeToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCD84321C0539BB0023CCC1 /* MGComposeToolBar.m */; };
+		FCCD84361C053AB60023CCC1 /* MGComposeToolBarItemButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCD84351C053AB60023CCC1 /* MGComposeToolBarItemButton.m */; };
+		FCCD84391C05613F0023CCC1 /* MGPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCD84381C05613F0023CCC1 /* MGPictureView.m */; };
+		FCCD843C1C05A9850023CCC1 /* MGPicturesView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCD843B1C05A9850023CCC1 /* MGPicturesView.m */; };
+		FCF4DC3D1C0444C600D252ED /* ComposeController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF4DC3C1C0444C600D252ED /* ComposeController.m */; };
+		FCF4DC411C044A9100D252ED /* MGTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF4DC401C044A9100D252ED /* MGTextView.m */; };
 		FCFBFE821BFAC6A100ABF6C5 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFBFE811BFAC6A100ABF6C5 /* Status.m */; };
 		FCFBFE851BFAC6E400ABF6C5 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFBFE841BFAC6E400ABF6C5 /* User.m */; };
 		FCFBFEA51BFAF3AB00ABF6C5 /* MGWeiboCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFBFEA41BFAF3AB00ABF6C5 /* MGWeiboCell.m */; };
@@ -268,6 +274,18 @@
 		FCA08D671BFDC3CF00B11230 /* MGPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPhotoView.m; sourceTree = "<group>"; };
 		FCB327981BFD6D3A003C169A /* MGStatusView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGStatusView.h; sourceTree = "<group>"; };
 		FCB327991BFD6D3A003C169A /* MGStatusView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGStatusView.m; sourceTree = "<group>"; };
+		FCCD84311C0539BB0023CCC1 /* MGComposeToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGComposeToolBar.h; sourceTree = "<group>"; };
+		FCCD84321C0539BB0023CCC1 /* MGComposeToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGComposeToolBar.m; sourceTree = "<group>"; };
+		FCCD84341C053AB60023CCC1 /* MGComposeToolBarItemButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGComposeToolBarItemButton.h; sourceTree = "<group>"; };
+		FCCD84351C053AB60023CCC1 /* MGComposeToolBarItemButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGComposeToolBarItemButton.m; sourceTree = "<group>"; };
+		FCCD84371C05613F0023CCC1 /* MGPictureView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPictureView.h; sourceTree = "<group>"; };
+		FCCD84381C05613F0023CCC1 /* MGPictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPictureView.m; sourceTree = "<group>"; };
+		FCCD843A1C05A9850023CCC1 /* MGPicturesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPicturesView.h; sourceTree = "<group>"; };
+		FCCD843B1C05A9850023CCC1 /* MGPicturesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPicturesView.m; sourceTree = "<group>"; };
+		FCF4DC3B1C0444C600D252ED /* ComposeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeController.h; sourceTree = "<group>"; };
+		FCF4DC3C1C0444C600D252ED /* ComposeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeController.m; sourceTree = "<group>"; };
+		FCF4DC3F1C044A9100D252ED /* MGTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTextView.h; sourceTree = "<group>"; };
+		FCF4DC401C044A9100D252ED /* MGTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGTextView.m; sourceTree = "<group>"; };
 		FCFBFE801BFAC6A100ABF6C5 /* Status.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Status.h; sourceTree = "<group>"; };
 		FCFBFE811BFAC6A100ABF6C5 /* Status.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Status.m; sourceTree = "<group>"; };
 		FCFBFE831BFAC6E400ABF6C5 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -415,9 +433,9 @@
 		FC624F881BF9C09B00F1E92D /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				FC624F891BF9C09B00F1E92D /* Discover */,
-				FC624F8F1BF9C09B00F1E92D /* Home */,
+				FCF4DC391C04449D00D252ED /* Compose */,
 				FC624F951BF9C09B00F1E92D /* Main */,
+				FC624F8F1BF9C09B00F1E92D /* Home */,
 				FC624FA71BF9C09B00F1E92D /* Me */,
 				FC624FAD1BF9C09B00F1E92D /* Message */,
 				FC624FB31BF9C09B00F1E92D /* NewFeature */,
@@ -434,7 +452,8 @@
 				FC624F8D1BF9C09B00F1E92D /* Model */,
 				FC624F8E1BF9C09B00F1E92D /* View */,
 			);
-			path = Discover;
+			name = Discover;
+			path = ../Discover;
 			sourceTree = "<group>";
 		};
 		FC624F8A1BF9C09B00F1E92D /* Controller */ = {
@@ -596,6 +615,7 @@
 		FC624FAD1BF9C09B00F1E92D /* Message */ = {
 			isa = PBXGroup;
 			children = (
+				FC624F891BF9C09B00F1E92D /* Discover */,
 				FC624FAE1BF9C09B00F1E92D /* Controller */,
 				FC624FB11BF9C09B00F1E92D /* Model */,
 				FC624FB21BF9C09B00F1E92D /* View */,
@@ -817,6 +837,41 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FCF4DC391C04449D00D252ED /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				FCF4DC3E1C044A6E00D252ED /* View */,
+				FCF4DC3A1C04449D00D252ED /* Controller */,
+			);
+			path = Compose;
+			sourceTree = "<group>";
+		};
+		FCF4DC3A1C04449D00D252ED /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FCF4DC3B1C0444C600D252ED /* ComposeController.h */,
+				FCF4DC3C1C0444C600D252ED /* ComposeController.m */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		FCF4DC3E1C044A6E00D252ED /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FCF4DC3F1C044A9100D252ED /* MGTextView.h */,
+				FCF4DC401C044A9100D252ED /* MGTextView.m */,
+				FCCD84311C0539BB0023CCC1 /* MGComposeToolBar.h */,
+				FCCD84321C0539BB0023CCC1 /* MGComposeToolBar.m */,
+				FCCD84341C053AB60023CCC1 /* MGComposeToolBarItemButton.h */,
+				FCCD84351C053AB60023CCC1 /* MGComposeToolBarItemButton.m */,
+				FCCD84371C05613F0023CCC1 /* MGPictureView.h */,
+				FCCD84381C05613F0023CCC1 /* MGPictureView.m */,
+				FCCD843A1C05A9850023CCC1 /* MGPicturesView.h */,
+				FCCD843B1C05A9850023CCC1 /* MGPicturesView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -947,6 +1002,7 @@
 				FC624FF91BF9C90500F1E92D /* AFHTTPSessionManager.m in Sources */,
 				FCA08D651BFDC21B00B11230 /* Photo.m in Sources */,
 				FC624FD11BF9C09B00F1E92D /* MGBadgeView.m in Sources */,
+				FCCD84331C0539BB0023CCC1 /* MGComposeToolBar.m in Sources */,
 				FC20D25E1BFEC83D00E93682 /* MJPhotoView.m in Sources */,
 				FC624FCD1BF9C09B00F1E92D /* MGDiscoverController.m in Sources */,
 				FC20D2BF1BFEE22E00E93682 /* MKAnnotationView+WebCache.m in Sources */,
@@ -957,6 +1013,7 @@
 				FC20D2BC1BFEE22E00E93682 /* MJRefreshConst.m in Sources */,
 				FC624FDD1BF9C09B00F1E92D /* UIBarButtonItem+MG.m in Sources */,
 				FCFBFEA51BFAF3AB00ABF6C5 /* MGWeiboCell.m in Sources */,
+				FCCD84391C05613F0023CCC1 /* MGPictureView.m in Sources */,
 				FC20D2581BFEC83D00E93682 /* MJPhoto.m in Sources */,
 				FC20D2BE1BFEE22E00E93682 /* MJRefreshHeaderView.m in Sources */,
 				FC20D2B81BFEE22E00E93682 /* NSObject+MJKeyValue.m in Sources */,
@@ -973,10 +1030,13 @@
 				FC624FD41BF9C09B00F1E92D /* MGTabBarButton.m in Sources */,
 				FC20D25A1BFEC83D00E93682 /* MJPhotoBrowser.m in Sources */,
 				FC20D2C81BFEE22E00E93682 /* UIButton+WebCache.m in Sources */,
+				FCF4DC3D1C0444C600D252ED /* ComposeController.m in Sources */,
 				FC20D2CB1BFEE22E00E93682 /* UIImage+WebP.m in Sources */,
 				FC20D2B01BFEE22E00E93682 /* MBProgressHUD.m in Sources */,
 				FC20D2491BFEAE8E00E93682 /* MGPhotosView.m in Sources */,
+				FCF4DC411C044A9100D252ED /* MGTextView.m in Sources */,
 				FC20D2CF1BFEE2B700E93682 /* MBProgressHUD+Add.m in Sources */,
+				FCCD84361C053AB60023CCC1 /* MGComposeToolBarItemButton.m in Sources */,
 				FC20D2C41BFEE22E00E93682 /* SDWebImageDownloader.m in Sources */,
 				FC624FFA1BF9C90500F1E92D /* AFNetworkReachabilityManager.m in Sources */,
 				FC20D2B41BFEE22E00E93682 /* MJMethod.m in Sources */,
@@ -993,6 +1053,7 @@
 				FC624FDE1BF9C09B00F1E92D /* UIImage+MG.m in Sources */,
 				FC20D25C1BFEC83D00E93682 /* MJPhotoProgressView.m in Sources */,
 				FC624FD81BF9C09B00F1E92D /* NewFeatureController.m in Sources */,
+				FCCD843C1C05A9850023CCC1 /* MGPicturesView.m in Sources */,
 				FC20D2D21BFEE66900E93682 /* SDWebImageManager+MJ.m in Sources */,
 				FC624FDA1BF9C09B00F1E92D /* MGAccount.m in Sources */,
 				FC65C68E1BFC699900C03234 /* MGStatusToolBar.m in Sources */,

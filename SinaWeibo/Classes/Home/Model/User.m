@@ -22,4 +22,15 @@
 //    return self;
 //}
 
+-(void)setGender:(NSString *)gender{
+    if([@"m" isEqualToString:gender]){
+        _gender = @"男";
+    }else if([@"f" isEqualToString:gender]){
+        _gender  = @"女";
+    }
+    else if([@"n" isEqualToString:gender]){
+        _gender  = @"未知";
+    }
+}
+
 @end

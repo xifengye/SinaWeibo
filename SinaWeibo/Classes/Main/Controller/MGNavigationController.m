@@ -8,6 +8,7 @@
 
 #import "MGNavigationController.h"
 
+
 @interface MGNavigationController ()
 
 @end
@@ -25,6 +26,7 @@
 
 +(void) setNavBarButtonItemTheme{
     UIBarButtonItem* item = [UIBarButtonItem appearance];
+   
     [item setBackButtonBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background"] forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     [item setBackButtonBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_pushed"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     [item setBackButtonBackgroundImage:[UIImage imageNamed:@"navigationbar_button_background_disable"] forState:UIControlStateDisabled barMetrics:UIBarMetricsDefault];
@@ -33,6 +35,11 @@
     textAttr[UITextAttributeTextColor] = [UIColor orangeColor];
     textAttr[UITextAttributeTextShadowOffset] = [NSValue valueWithUIOffset:UIOffsetMake(0, 0)];
     [item setTitleTextAttributes:textAttr forState:UIControlStateNormal];
+
+     [item setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor grayColor]} forState:UIControlStateDisabled];
+//    NSMutableDictionary* disableTextAttr = [NSMutableDictionary dictionary];
+//    disableTextAttr[UITextAttributeTextColor] = [UIColor grayColor];
+//    [item setTitleTextAttributes:disableTextAttr forState:UIControlStateDisabled];
 }
 
 +(void) setNavBarTheme{
@@ -51,5 +58,7 @@
     }
     [super pushViewController:viewController animated:animated];
 }
+
+
 
 @end

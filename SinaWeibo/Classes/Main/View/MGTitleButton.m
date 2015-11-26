@@ -26,6 +26,14 @@
     
 }
 
+-(void)setTitle:(NSString *)title forState:(UIControlState)state{
+    [super setTitle:title forState:state];
+    CGSize titleSize = [title sizeWithFont:self.font];
+    CGFloat titleViewHeight = MAX(titleSize.height, self.currentImage.size.height);
+    self.frame = CGRectMake(0, 0,titleSize.width+self.currentImage.size.width+10, titleViewHeight);
+    [self invalidateIntrinsicContentSize];
+}
+
 -(CGRect)titleRectForContentRect:(CGRect)contentRect{
     return CGRectMake(0, 0, contentRect.size.width-self.currentImage.size.width, contentRect.size.height);
 }

@@ -58,8 +58,8 @@
 }
 
 -(void)onPlusButtonClicked:(UIButton*)button{
-    if([self.delegate respondsToSelector:@selector(plusBar:)]){
-        [self.delegate plusBar:self];
+    if([self.delegate respondsToSelector:@selector(tabBarDidClickedPlusButton:)]){
+        [self.delegate tabBarDidClickedPlusButton:self];
     }
 }
 

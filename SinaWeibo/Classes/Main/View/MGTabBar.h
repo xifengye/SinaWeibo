@@ -13,7 +13,7 @@
 
 @optional
 -(void)tabBar:(MGTabBar*)tabBar didSelectedButtonFrom:(int)from to:(int)to;
--(void)plusBar:(UIButton*)tabBar;
+-(void)tabBarDidClickedPlusButton:(MGTabBar*)tabBar;
 @end
 
 @interface MGTabBar : UIView

@@ -36,7 +36,7 @@
         frame.size.width = textWidth;
         frame.size.height=  self.currentBackgroundImage.size.height;
         self.frame = frame;
-        NSLog(@"%@,%@",badgeValue,NSStringFromCGRect(self.frame));
+//        NSLog(@"%@,%@",badgeValue,NSStringFromCGRect(self.frame));
         self.hidden = NO;
     }else{
         self.hidden = YES;

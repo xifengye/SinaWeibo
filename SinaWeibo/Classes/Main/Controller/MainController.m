@@ -13,6 +13,7 @@
 #import "MGNavigationController.h"
 #import "MGMeController.h"
 #import "MGTabBar.h"
+#import "ComposeController.h"
 
 @interface MainController ()
 
@@ -86,8 +87,10 @@
     self.selectedIndex = to;
 }
 
--(void)plusBar:(UIButton *)tabBar{
-    NSLog(@"plusBar");
+-(void)tabBarDidClickedPlusButton:(MGTabBar *)tabBar{
+    ComposeController* composeController = [[ComposeController alloc]init];
+    MGNavigationController* navController = [[MGNavigationController alloc]initWithRootViewController:composeController];
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 @end

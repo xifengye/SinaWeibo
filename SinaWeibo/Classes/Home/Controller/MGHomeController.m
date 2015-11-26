@@ -16,12 +16,26 @@
 #import "MJExtension.h"
 #import "StatusFrame.h"
 #import "MGWeiboCell.h"
+#import "UIImage+MG.h"
+#import "MJRefresh.h"
+#import "MGAccount.h"
+#import "MGAccountTool.h"
 
 
-@interface MGHomeController ()
+typedef NS_ENUM(NSInteger, UITableDragWhere) {
+    Header,
+    Footer,
+};
+
+@interface MGHomeController ()<MJRefreshBaseViewDelegate>
 @property(nonatomic,strong)NSMutableArray* statuesFrame;
-@property(nonatomic,strong)UIRefreshControl* refreshView;
+//@property(nonatomic,strong)UIRefreshControl* refreshView;
+@property(nonatomic,strong)MJRefreshFooterView* footerView;
+@property(nonatomic,strong)MJRefreshHeaderView* headerView;
+@property(nonatomic,assign)UITableDragWhere where;
 @end
+
+
 
 @implementation MGHomeController
 
@@ -35,10 +49,29 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [_statuesFrame removeAllObjects];
     [self setupNavBar];
     [self setupTableView];
     [self setupRefreshController];
+    [self setupInfo];
     
+}
+
+/**
+ 加载用户信息
+ */
+-(void)setupInfo{
+    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
+    MGAccount* account = [MGAccountTool getAccount];
+    NSString* url = [ NSString stringWithFormat:@"https://api.weibo.com/2/users/show.json?access_token=%@&uid=%lld",account.access_token,account.uid];
+    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        User* user = [User objectWithKeyValues:responseObject];
+        MGTitleButton* titleView = self.navigationItem.titleView;
+        [titleView setTitle:user.name forState:UIControlStateNormal];
+        NSLog(@"加载当前用户信息成功:%@",user);
+    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+        NSLog(@"加载当前用户信息失败");
+    }];
 }
 
 -(void)setupTableView{
@@ -48,16 +81,37 @@
 }
 
 -(void)setupRefreshController{
-    UIRefreshControl* refreshView = [[UIRefreshControl alloc]init];
-    [self.tableView addSubview:refreshView];
-    self.refreshView = refreshView;
-    [refreshView addTarget:self action:@selector(tableViewRefresh:) forControlEvents:UIControlEventValueChanged];
-    [self.refreshView beginRefreshing];
-    [self tableViewRefresh:refreshView];
+//    UIRefreshControl* refreshView = [[UIRefreshControl alloc]init];
+//    [self.tableView addSubview:refreshView];
+//    self.refreshView = refreshView;
+//    [refreshView addTarget:self action:@selector(tableViewRefresh:) forControlEvents:UIControlEventValueChanged];
+//    [self.refreshView beginRefreshing];
+//    [self tableViewHeaderRefresh:refreshView];
+    
+    MJRefreshHeaderView* headerView = [MJRefreshHeaderView header];
+    headerView.scrollView = self.tableView;
+    headerView.delegate = self;
+    headerView.tag = 1;
+    self.headerView = headerView;
+    
+    
+    MJRefreshFooterView* footerView = [MJRefreshFooterView footer];
+    footerView.scrollView = self.tableView;
+    footerView.delegate = self;
+    footerView.tag = 2;
+    self.footerView = footerView;
+    
+    [headerView beginRefreshing];
 }
 
--(void)tableViewRefresh:(UIRefreshControl*)refreshView{
-    NSLog(@"refresh");
+//-(void)tableViewHeaderRefresh:(UIRefreshControl*)refreshView{
+//    NSLog(@"refresh");
+//    self.where = Header;
+//    [self loadWeibo];
+//}
+
+-(void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView{
+    self.where = refreshView.tag==1?Header:Footer;
     [self loadWeibo];
 }
 
@@ -68,13 +122,18 @@
     NSMutableDictionary* params = [NSMutableDictionary dictionary];
     params[@"access_token"] = account.access_token;
     params[@"count"] = @20;
-    if(_statuesFrame.count>0){
-        StatusFrame* s = self.statuesFrame[0];
-        params[@"since_id"]=s.status.idstr;
+    if(self.where==Header){
+        if(_statuesFrame.count>0){
+            StatusFrame* s = self.statuesFrame[0];
+            params[@"since_id"]=s.status.idstr;
+        }
+    }else if(self.where == Footer){
+        StatusFrame* s = [self.statuesFrame lastObject];
+        params[@"max_id"]=s.status.idstr;
     }
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     [manager GET:url parameters:params success:^(AFHTTPRequestOperation * operation, id response) {
-        NSLog(@"success   %@",response);
+//        NSLog(@"success   %@",response);
         NSArray* arr = response[@"statuses"];
         NSArray* statusArray = [Status objectArrayWithKeyValuesArray:arr];
         NSMutableArray* statusFrameArray = [NSMutableArray array];
@@ -83,38 +142,73 @@
             statusFrame.status = status;
             [statusFrameArray addObject:statusFrame];
         }
-        NSMutableArray* temp = [NSMutableArray array];
-        [temp addObjectsFromArray:statusFrameArray];
-        if(self.statuesFrame.count>0){
-            [temp addObjectsFromArray:self.statuesFrame];
+        if(self.where==Header){
+            [self toastRefreshResult:statusFrameArray.count];
+            NSMutableArray* temp = [NSMutableArray array];
+            [temp addObjectsFromArray:statusFrameArray];
+            if(self.statuesFrame.count>0){
+                [temp addObjectsFromArray:self.statuesFrame];
+            }
+            self.statuesFrame = temp;
+            [self.headerView endRefreshing];
+        }else if(self.where == Footer){
+            [self.statuesFrame addObjectsFromArray:statusFrameArray];
+            [self.footerView endRefreshing];
+            
         }
-        self.statuesFrame = temp;
         [self.tableView reloadData];
-        if([self.refreshView isRefreshing]){
-            [self.refreshView endRefreshing];
+        
+      } failure:^(AFHTTPRequestOperation * operation , NSError * error) {
+//        NSLog(@"error   %@",error);
+        if([self.headerView isRefreshing]){
+            [self.headerView endRefreshing];
         }
-    } failure:^(AFHTTPRequestOperation * operation , NSError * error) {
-        NSLog(@"error   %@",error);
-        if([self.refreshView isRefreshing]){
-            [self.refreshView endRefreshing];
+        if([self.footerView isRefreshing]){
+            [self.footerView endRefreshing];
         }
     }];
 }
 
+-(void)toastRefreshResult:(int)newCount{
+    UIButton* btn = [[UIButton alloc]init];
+    btn.userInteractionEnabled = NO;
+    [self.navigationController.view insertSubview:btn belowSubview:self.navigationController.navigationBar];
+    [btn setBackgroundImage:[UIImage imageWithStretchable:@"timeline_new_status_background"] forState:UIControlStateNormal];
+    if(newCount>0){
+        [btn setTitle:[NSString stringWithFormat:@"%d 条新数据",newCount] forState:UIControlStateNormal];
+    }else{
+        [btn setTitle:@"没有新数据" forState:UIControlStateNormal];
+    }
+    
+    CGFloat btnW = self.view.frame.size.width;
+    CGFloat btnH = 30;
+    CGFloat btnX = 0;
+    CGFloat btnY = 64-btnH;
+    btn.frame = CGRectMake(btnX, btnY, btnW, btnH);
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        btn.transform = CGAffineTransformMakeTranslation(0, btnH+1);
+    } completion:^(BOOL finished) {
+        [UIView animateKeyframesWithDuration:0.7 delay:1.0 options:UIViewKeyframeAnimationOptionCalculationModeLinear animations:^{
+            btn.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            [btn removeFromSuperview];
+        }];
+    }];
+}
+
 -(void)setupNavBar{
+    self.navigationController.navigationBar.backgroundColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithButton:@"navigationbar_friendsearch" highImage:@"navigationbar_friendsearch_highlighted" target:self action:@selector(leftBarButtonItemClicked:)];
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithButton:@"navigationbar_pop" highImage:@"navigationbar_pop_highlighted" target:self action:@selector(rightBarButtonItemClicked:)];
     
-    NSString* title = @"微博Iphone客";
+    NSString* title = @"首页";
     UIImage* rightImage = [UIImage imageNamed:@"navigationbar_arrow_down"];
     MGTitleButton* titleView = [[MGTitleButton alloc] init];
     titleView.delegate = self;
-    CGSize titleSize = [title sizeWithFont:titleView.font];
-    CGFloat titleViewHeight = MAX(titleSize.height, rightImage.size.height);
-    titleView.frame = CGRectMake(0, 0,titleSize.width+rightImage.size.width+10, titleViewHeight);
-    [titleView setTitle:title forState:UIControlStateNormal];
     [titleView setImage:rightImage forState:UIControlStateNormal];
+    [titleView setTitle:title forState:UIControlStateNormal];
     self.navigationItem.titleView = titleView;
 
 }
