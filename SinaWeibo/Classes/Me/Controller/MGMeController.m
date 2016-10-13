@@ -7,6 +7,8 @@
 //
 
 #import "MGMeController.h"
+#import "MGMeCellView.h"
+#import "MGMeCountCell.h"
 
 
 @interface MGMeController ()
@@ -15,13 +17,136 @@
 
 @implementation MGMeController
 
+- (instancetype)init
+{
+    self = [super initWithStyle:UITableViewStyleGrouped];
+    if (self) {
+        self.tableView.showsVerticalScrollIndicator = false;
+    }
+    return self;
+}
 - (void)viewDidLoad {
+    NSLog(@"controller width = %f",self.view.frame.size.width);
     [super viewDidLoad];
-    self.tabBarItem.badgeValue = @"meme";
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+    [self setupNavBar];
+    [self setupSettingView];
+}
+
+-(void)setupSettingView{
+//     UIView* profileView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200)];
+//    profileView.backgroundColor = [UIColor redColor];
+//    
+//     self.tableView.tableHeaderView = profileView;
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+    [self addSection:^(JMStaticContentTableViewSection *section, NSUInteger sectionIndex) {
+       [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+           staticContentCell.reuseIdentifier = @"MeCell";
+           staticContentCell.tableViewCellSubclass = [MGMeCellView class];
+           staticContentCell.cellHeight = CELL_HEIGHT;
+       } whenSelected:^(NSIndexPath *indexPath) {
+           
+       }];
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.reuseIdentifier = @"MeCountCell";
+            staticContentCell.tableViewCellSubclass = [MGMeCountCell class];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }];
+    }];
+    
+    [self addSection:^(JMStaticContentTableViewSection *section, NSUInteger sectionIndex) {
+       [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+           staticContentCell.reuseIdentifier = @"ValueTextCell";
+           cell.imageView.image = [UIImage imageNamed:@"new_friend"];
+           cell.textLabel.text = @"新的好友";
+       } whenSelected:^(NSIndexPath *indexPath) {
+           NSLog(@"新的好友");
+       }];
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.reuseIdentifier = @"ValueTextCell";
+            cell.imageView.image = [UIImage imageNamed:@"new_friend"];
+            cell.textLabel.text = @"微博等级";
+        } whenSelected:^(NSIndexPath *indexPath) {
+            
+        }];
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.reuseIdentifier = @"ValueTextCell";
+            cell.imageView.image = [UIImage imageNamed:@"new_friend"];
+            cell.textLabel.text = @"编辑资料";
+        } whenSelected:^(NSIndexPath *indexPath) {
+            
+        }];
+    }];
+    
+    [self addSection:^(JMStaticContentTableViewSection *section, NSUInteger sectionIndex) {
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.reuseIdentifier = @"ValueTextCell";
+            cell.imageView.image = [UIImage imageNamed:@"new_friend"];
+            cell.textLabel.text = @"我的相册";
+        } whenSelected:^(NSIndexPath *indexPath) {
+            NSLog(@"新的好友");
+        }];
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.reuseIdentifier = @"ValueTextCell";
+            cell.imageView.image = [UIImage imageNamed:@"new_friend"];
+            cell.textLabel.text = @"我的点评";
+        } whenSelected:^(NSIndexPath *indexPath) {
+            
+        }];
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.reuseIdentifier = @"ValueTextCell";
+            cell.imageView.image = [UIImage imageNamed:@"new_friend"];
+            cell.textLabel.text = @"我的赞";
+        } whenSelected:^(NSIndexPath *indexPath) {
+            
+        }];
+    }];
+    
+    [self addSection:^(JMStaticContentTableViewSection *section, NSUInteger sectionIndex) {
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.reuseIdentifier = @"ValueTextCell";
+            cell.imageView.image = [UIImage imageNamed:@"new_friend"];
+            cell.textLabel.text = @"微博会员";
+        } whenSelected:^(NSIndexPath *indexPath) {
+            NSLog(@"新的好友");
+        }];
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.reuseIdentifier = @"ValueTextCell";
+            cell.imageView.image = [UIImage imageNamed:@"new_friend"];
+            cell.textLabel.text = @"微博运动";
+        } whenSelected:^(NSIndexPath *indexPath) {
+            
+        }];
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.reuseIdentifier = @"ValueTextCell";
+            cell.imageView.image = [UIImage imageNamed:@"new_friend"];
+            cell.textLabel.text = @"微博支付";
+        } whenSelected:^(NSIndexPath *indexPath) {
+            
+        }];
+    }];
+    [self addSection:^(JMStaticContentTableViewSection *section, NSUInteger sectionIndex) {
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.reuseIdentifier = @"ValueTextCell";
+            cell.imageView.image = [UIImage imageNamed:@"new_friend"];
+            cell.textLabel.text = @"草稿箱";
+        } whenSelected:^(NSIndexPath *indexPath) {
+        }];
+    }];
+
+    [self addSection:^(JMStaticContentTableViewSection *section, NSUInteger sectionIndex) {
+        [section addCell:^(JMStaticContentTableViewCell *staticContentCell, UITableViewCell *cell, NSIndexPath *indexPath) {
+            staticContentCell.reuseIdentifier = @"ValueTextCell";
+            cell.imageView.image = [UIImage imageNamed:@"new_friend"];
+            cell.textLabel.text = @"更多";
+        } whenSelected:^(NSIndexPath *indexPath) {
+        }];
+    }];
+
+
+}
+
+-(void)setupNavBar{
+     self.tabBarItem.badgeValue = @"meme";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"设置" style:UIBarButtonItemStyleDone target:nil action:nil];
 }
 
@@ -30,72 +155,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-/*
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
-}
-*/
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

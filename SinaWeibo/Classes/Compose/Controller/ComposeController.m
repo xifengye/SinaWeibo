@@ -8,12 +8,14 @@
 
 #import "ComposeController.h"
 #import "MGTextView.h"
-#import "AFNetworking.h"
 #import "MGAccount.h"
 #import "MGAccountTool.h"
 #import "MBProgressHUD+MJ.h"
 #import "MGComposeToolBar.h"
 #import "MGPicturesView.h"
+#import "UzysAssetsPickerController.h"
+#import "HttpTool.h"
+#import "BinaryData.h"
 
 #define MGNotificationCenter [NSNotificationCenter defaultCenter]
 #define TextViewTextHeight  100
@@ -24,7 +26,7 @@
 }
 @end
 
-@interface ComposeController ()<ComposeToolBarDetegate,UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,MGPicturesViewDelegate>
+@interface ComposeController ()<ComposeToolBarDetegate,UITextViewDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,MGPicturesViewDelegate,UzysAssetsPickerControllerDelegate>
 @property(nonatomic,weak)MGTextView* textView;
 @property(nonatomic,weak)MGComposeToolBar* composeToolBar;
 @property(nonatomic,weak)MGPicturesView* picturesView;
@@ -84,10 +86,41 @@
 }
 
 -(void)openAlbum{
+    /*
+     调用系统打开相册
     UIImagePickerController* ipc = [[UIImagePickerController alloc]init];
     ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     [self presentViewController:ipc animated:YES completion:nil];
     ipc.delegate = self;
+     */
+    
+    UzysAssetsPickerController *picker = [[UzysAssetsPickerController alloc] init];
+    picker.delegate = self;
+    picker.maximumNumberOfSelectionVideo = 0;
+    picker.maximumNumberOfSelectionPhoto = 9;
+    [self presentViewController:picker animated:YES completion:^{
+        
+    }];
+
+    
+}
+
+- (void)UzysAssetsPickerController:(UzysAssetsPickerController *)picker didFinishPickingAssets:(NSArray *)assets
+{
+    NSLog(@"assets %d",assets.count);
+    if(assets.count<=0){
+        return;
+    }
+    self.picturesView.hidden = NO;
+    __weak typeof(self) weakSelf = self;
+    [assets enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        ALAsset *representation = obj;
+        
+        UIImage *img = [UIImage imageWithCGImage:representation.defaultRepresentation.fullResolutionImage
+                                           scale:representation.defaultRepresentation.scale
+                                     orientation:(UIImageOrientation)representation.defaultRepresentation.orientation];
+        [weakSelf.picturesView addItem:img];
+    }];
 }
 
 -(void)openCarema{
@@ -172,67 +205,55 @@
 
 
 -(void)sendMessage{
-    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     MGAccount* account = [MGAccountTool getAccount];
     if(self.picturesView.images.count>0){
-        [self sendPictureMessage:self.textView.text images:nil useAccessToken:account.access_token byAf:manager];
+        [self sendPictureMessage:self.textView.text images:nil useAccessToken:account.access_token];
     }else{
-        [self sendTextMessage:self.textView.text useAccessToken:account.access_token byAf:manager];
+        [self sendTextMessage:self.textView.text useAccessToken:account.access_token];
     }
     
     [self cancel];
 }
 
--(void)sendPictureMessage:(NSString*)text images:(NSArray*)images useAccessToken:(NSString*)accessToken byAf:(AFHTTPRequestOperationManager*)manager{
+-(void)sendPictureMessage:(NSString*)text images:(NSArray*)images useAccessToken:(NSString*)accessToken{
     NSMutableDictionary* params = [NSMutableDictionary dictionary];
     NSString* url = @"https://api.weibo.com/2/statuses/upload.json";
     params[@"access_token"] = accessToken;
     NSString *encodedValue = self.textView.text;
     params[@"status"] = encodedValue;
-    [manager POST:url parameters:params constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-        //constructingBodyWithBlock这个block在发送请求之前会自动调用
-        for(int i=0;i<self.picturesView.images.count;i++){
-            NSData* data = UIImageJPEGRepresentation(self.picturesView.images[i], 1.0);
-            [formData appendPartWithFileData:data name:@"pic" fileName:@"" mimeType:@"image/jepg"];
-        }
-    } success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"发送一条信息成功:%@",responseObject);
-        [MBProgressHUD showSuccess:@"发送成功"];
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    NSMutableArray* binaryParams = [NSMutableArray array];
+    for(UIImage* image in self.picturesView.images){
+        BinaryData* data = [[BinaryData alloc]init];
+        data.paramName = @"pic";
+        data.serverFileName =@"";
+        data.data = UIImageJPEGRepresentation(image, 0.0001);
+        data.mimeType = @"image/jpeg";
+        [binaryParams addObject:data];
+    }
+    [HttpTool POST:url textParams:params binaryParams:binaryParams success:^(id response) {
+        NSLog(@"发送一条信息成功:%@",response);
+    } failure:^(NSError *error) {
         NSLog(@"发送一条信息失败:%@",error);
-        [MBProgressHUD showError:@"发送失败"];
-    }];
+    } progressText:nil successToast:@"发送成功" failureToast:@"发送失败"];
 }
 
--(void)sendTextMessage:(NSString*)text useAccessToken:(NSString*)accessToken byAf:(AFHTTPRequestOperationManager*)manager{
+-(void)sendTextMessage:(NSString*)text useAccessToken:(NSString*)accessToken{
     NSMutableDictionary* params = [NSMutableDictionary dictionary];
     NSString* url = @"https://api.weibo.com/2/statuses/update.json";
     params[@"access_token"] = accessToken;
     NSString *encodedValue = text;
     params[@"status"] = encodedValue;
-    [manager POST:url parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"发送一条信息成功:%@",responseObject);
-        [MBProgressHUD showSuccess:@"发送成功"];
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
+    [HttpTool POST:url params:params success:^(id response) {
+        NSLog(@"发送一条信息成功:%@",response);
+    } failure:^(NSError *error) {
         NSLog(@"发送一条信息失败:%@",error);
-        [MBProgressHUD showError:@"发送失败"];
-    }];
+    } progressText:nil successToast:@"发送成功" failureToast:@"发送失败"];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 -(void)dealloc{
     [MGNotificationCenter removeObserver:self];

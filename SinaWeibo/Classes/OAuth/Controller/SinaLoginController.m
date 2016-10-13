@@ -7,7 +7,7 @@
 //
 
 #import "SinaLoginController.h"
-#import "AFNetworking.h"
+#import "HttpTool.h"
 #import "MGAccount.h"
 #import "NewFeatureController.h"
 #import "MainController.h"
@@ -40,16 +40,13 @@
 -(void)accessTokenWithCode:(NSString*)code{
     NSString* url = @"https://api.weibo.com/oauth2/access_token";
     NSLog(@"url=  %@\n\n",url);
-    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//    manager.responseSerializer = [AFJSONResponseSerializer serializer];
     NSMutableDictionary* params = [NSMutableDictionary dictionary];
     params[@"client_id"] = @"2572811273";
     params[@"client_secret"] = @"cb92ea0cdb6a398be6478f426de44689";
     params[@"grant_type"] = @"authorization_code";
     params[@"redirect_uri"] = @"http://www.moregood.com";
     params[@"code"] = code;
-    [manager POST:url parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [HttpTool POST:url params:params success:^(id response) {
         /*
          success    {
          "access_token" = "2.00oWPclCBkPHoC398153322adM3EiB";
@@ -58,13 +55,11 @@
          uid = 2535869614;
          }
          */
-        MGAccount* account = [MGAccount accountWithDictionary:responseObject];
+        MGAccount* account = [MGAccount accountWithDictionary:response];
         [self didLoginSuccess:account];
-        
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"\n\nerror     %@",error);
-            [MBProgressHUD hideHUD];
-    }];
+    } failure:^(NSError *error) {
+        [MBProgressHUD hideHUD];
+    } progressText:nil successToast:nil failureToast:nil];
     
 }
 

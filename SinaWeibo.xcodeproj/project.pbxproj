@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		FC042E841BFD918F000D8943 /* MGStatusImagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC042E831BFD918F000D8943 /* MGStatusImagesView.m */; };
+		FC1D0AAF1C0BECD100F1F889 /* JMStaticContentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1D0AA81C0BECD100F1F889 /* JMStaticContentTableViewCell.m */; };
+		FC1D0AB01C0BECD100F1F889 /* JMStaticContentTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1D0AAA1C0BECD100F1F889 /* JMStaticContentTableViewController.m */; };
+		FC1D0AB11C0BECD100F1F889 /* JMStaticContentTableViewSection.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1D0AAC1C0BECD100F1F889 /* JMStaticContentTableViewSection.m */; };
+		FC1D0AB21C0BECD100F1F889 /* StaticTextFieldTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1D0AAE1C0BECD100F1F889 /* StaticTextFieldTableViewCell.m */; };
+		FC1D0AB51C0BFD3400F1F889 /* MGMeCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1D0AB41C0BFD3400F1F889 /* MGMeCellView.m */; };
+		FC1D0AB81C0C133A00F1F889 /* MGMeCountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1D0AB71C0C133A00F1F889 /* MGMeCountCell.m */; };
 		FC20D2491BFEAE8E00E93682 /* MGPhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC20D2481BFEAE8E00E93682 /* MGPhotosView.m */; };
 		FC20D2581BFEC83D00E93682 /* MJPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = FC20D24C1BFEC83D00E93682 /* MJPhoto.m */; };
 		FC20D2591BFEC83D00E93682 /* MJPhotoBrowser.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC20D24D1BFEC83D00E93682 /* MJPhotoBrowser.bundle */; };
@@ -93,6 +99,16 @@
 		FCCD84361C053AB60023CCC1 /* MGComposeToolBarItemButton.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCD84351C053AB60023CCC1 /* MGComposeToolBarItemButton.m */; };
 		FCCD84391C05613F0023CCC1 /* MGPictureView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCD84381C05613F0023CCC1 /* MGPictureView.m */; };
 		FCCD843C1C05A9850023CCC1 /* MGPicturesView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCCD843B1C05A9850023CCC1 /* MGPicturesView.m */; };
+		FCF17DC21C06DA7C00810113 /* UzysAssetPickerController.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FCF17DB31C06DA7C00810113 /* UzysAssetPickerController.bundle */; };
+		FCF17DC31C06DA7C00810113 /* UzysAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF17DB51C06DA7C00810113 /* UzysAssetsPickerController.m */; };
+		FCF17DC41C06DA7C00810113 /* UzysAssetsPickerController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF17DB61C06DA7C00810113 /* UzysAssetsPickerController.xib */; };
+		FCF17DC51C06DA7C00810113 /* UzysAssetsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF17DB91C06DA7C00810113 /* UzysAssetsViewCell.m */; };
+		FCF17DC61C06DA7C00810113 /* UzysGroupPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF17DBB1C06DA7C00810113 /* UzysGroupPickerView.m */; };
+		FCF17DC71C06DA7C00810113 /* UzysGroupPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF17DBD1C06DA7C00810113 /* UzysGroupPickerViewController.m */; };
+		FCF17DC81C06DA7C00810113 /* UzysGroupViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF17DBF1C06DA7C00810113 /* UzysGroupViewCell.m */; };
+		FCF17DC91C06DA7C00810113 /* UzysWrapperPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF17DC11C06DA7C00810113 /* UzysWrapperPickerController.m */; };
+		FCF17DCD1C06E77900810113 /* HttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF17DCC1C06E77900810113 /* HttpTool.m */; };
+		FCF17DD01C06EA5900810113 /* BinaryData.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF17DCF1C06EA5900810113 /* BinaryData.m */; };
 		FCF4DC3D1C0444C600D252ED /* ComposeController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF4DC3C1C0444C600D252ED /* ComposeController.m */; };
 		FCF4DC411C044A9100D252ED /* MGTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF4DC401C044A9100D252ED /* MGTextView.m */; };
 		FCFBFE821BFAC6A100ABF6C5 /* Status.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFBFE811BFAC6A100ABF6C5 /* Status.m */; };
@@ -114,6 +130,19 @@
 /* Begin PBXFileReference section */
 		FC042E821BFD918F000D8943 /* MGStatusImagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGStatusImagesView.h; sourceTree = "<group>"; };
 		FC042E831BFD918F000D8943 /* MGStatusImagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGStatusImagesView.m; sourceTree = "<group>"; };
+		FC1D0AA61C0BECD100F1F889 /* JMStaticContentTableViewBlocks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTableViewBlocks.h; sourceTree = "<group>"; };
+		FC1D0AA71C0BECD100F1F889 /* JMStaticContentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTableViewCell.h; sourceTree = "<group>"; };
+		FC1D0AA81C0BECD100F1F889 /* JMStaticContentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTableViewCell.m; sourceTree = "<group>"; };
+		FC1D0AA91C0BECD100F1F889 /* JMStaticContentTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTableViewController.h; sourceTree = "<group>"; };
+		FC1D0AAA1C0BECD100F1F889 /* JMStaticContentTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTableViewController.m; sourceTree = "<group>"; };
+		FC1D0AAB1C0BECD100F1F889 /* JMStaticContentTableViewSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStaticContentTableViewSection.h; sourceTree = "<group>"; };
+		FC1D0AAC1C0BECD100F1F889 /* JMStaticContentTableViewSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStaticContentTableViewSection.m; sourceTree = "<group>"; };
+		FC1D0AAD1C0BECD100F1F889 /* StaticTextFieldTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StaticTextFieldTableViewCell.h; sourceTree = "<group>"; };
+		FC1D0AAE1C0BECD100F1F889 /* StaticTextFieldTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StaticTextFieldTableViewCell.m; sourceTree = "<group>"; };
+		FC1D0AB31C0BFD3400F1F889 /* MGMeCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMeCellView.h; sourceTree = "<group>"; };
+		FC1D0AB41C0BFD3400F1F889 /* MGMeCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMeCellView.m; sourceTree = "<group>"; };
+		FC1D0AB61C0C133A00F1F889 /* MGMeCountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGMeCountCell.h; sourceTree = "<group>"; };
+		FC1D0AB71C0C133A00F1F889 /* MGMeCountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGMeCountCell.m; sourceTree = "<group>"; };
 		FC20D2471BFEAE8E00E93682 /* MGPhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPhotosView.h; sourceTree = "<group>"; };
 		FC20D2481BFEAE8E00E93682 /* MGPhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPhotosView.m; sourceTree = "<group>"; };
 		FC20D24B1BFEC83D00E93682 /* MJPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJPhoto.h; sourceTree = "<group>"; };
@@ -282,6 +311,25 @@
 		FCCD84381C05613F0023CCC1 /* MGPictureView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPictureView.m; sourceTree = "<group>"; };
 		FCCD843A1C05A9850023CCC1 /* MGPicturesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGPicturesView.h; sourceTree = "<group>"; };
 		FCCD843B1C05A9850023CCC1 /* MGPicturesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MGPicturesView.m; sourceTree = "<group>"; };
+		FCF17DB31C06DA7C00810113 /* UzysAssetPickerController.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = UzysAssetPickerController.bundle; sourceTree = "<group>"; };
+		FCF17DB41C06DA7C00810113 /* UzysAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAssetsPickerController.h; sourceTree = "<group>"; };
+		FCF17DB51C06DA7C00810113 /* UzysAssetsPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysAssetsPickerController.m; sourceTree = "<group>"; };
+		FCF17DB61C06DA7C00810113 /* UzysAssetsPickerController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UzysAssetsPickerController.xib; sourceTree = "<group>"; };
+		FCF17DB71C06DA7C00810113 /* UzysAssetsPickerController_Configuration.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAssetsPickerController_Configuration.h; sourceTree = "<group>"; };
+		FCF17DB81C06DA7C00810113 /* UzysAssetsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysAssetsViewCell.h; sourceTree = "<group>"; };
+		FCF17DB91C06DA7C00810113 /* UzysAssetsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysAssetsViewCell.m; sourceTree = "<group>"; };
+		FCF17DBA1C06DA7C00810113 /* UzysGroupPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysGroupPickerView.h; sourceTree = "<group>"; };
+		FCF17DBB1C06DA7C00810113 /* UzysGroupPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysGroupPickerView.m; sourceTree = "<group>"; };
+		FCF17DBC1C06DA7C00810113 /* UzysGroupPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysGroupPickerViewController.h; sourceTree = "<group>"; };
+		FCF17DBD1C06DA7C00810113 /* UzysGroupPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysGroupPickerViewController.m; sourceTree = "<group>"; };
+		FCF17DBE1C06DA7C00810113 /* UzysGroupViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysGroupViewCell.h; sourceTree = "<group>"; };
+		FCF17DBF1C06DA7C00810113 /* UzysGroupViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysGroupViewCell.m; sourceTree = "<group>"; };
+		FCF17DC01C06DA7C00810113 /* UzysWrapperPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UzysWrapperPickerController.h; sourceTree = "<group>"; };
+		FCF17DC11C06DA7C00810113 /* UzysWrapperPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UzysWrapperPickerController.m; sourceTree = "<group>"; };
+		FCF17DCB1C06E77900810113 /* HttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpTool.h; sourceTree = "<group>"; };
+		FCF17DCC1C06E77900810113 /* HttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpTool.m; sourceTree = "<group>"; };
+		FCF17DCE1C06EA5900810113 /* BinaryData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BinaryData.h; sourceTree = "<group>"; };
+		FCF17DCF1C06EA5900810113 /* BinaryData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BinaryData.m; sourceTree = "<group>"; };
 		FCF4DC3B1C0444C600D252ED /* ComposeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeController.h; sourceTree = "<group>"; };
 		FCF4DC3C1C0444C600D252ED /* ComposeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeController.m; sourceTree = "<group>"; };
 		FCF4DC3F1C044A9100D252ED /* MGTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MGTextView.h; sourceTree = "<group>"; };
@@ -315,6 +363,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FC1D0AA51C0BECD100F1F889 /* JMStaticContentTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FC1D0AA61C0BECD100F1F889 /* JMStaticContentTableViewBlocks.h */,
+				FC1D0AA71C0BECD100F1F889 /* JMStaticContentTableViewCell.h */,
+				FC1D0AA81C0BECD100F1F889 /* JMStaticContentTableViewCell.m */,
+				FC1D0AA91C0BECD100F1F889 /* JMStaticContentTableViewController.h */,
+				FC1D0AAA1C0BECD100F1F889 /* JMStaticContentTableViewController.m */,
+				FC1D0AAB1C0BECD100F1F889 /* JMStaticContentTableViewSection.h */,
+				FC1D0AAC1C0BECD100F1F889 /* JMStaticContentTableViewSection.m */,
+				FC1D0AAD1C0BECD100F1F889 /* StaticTextFieldTableViewCell.h */,
+				FC1D0AAE1C0BECD100F1F889 /* StaticTextFieldTableViewCell.m */,
+			);
+			path = JMStaticContentTableViewController;
+			sourceTree = "<group>";
+		};
 		FC20D24A1BFEC83D00E93682 /* MJPhotoBrowser */ = {
 			isa = PBXGroup;
 			children = (
@@ -608,6 +672,10 @@
 		FC624FAC1BF9C09B00F1E92D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				FC1D0AB31C0BFD3400F1F889 /* MGMeCellView.h */,
+				FC1D0AB41C0BFD3400F1F889 /* MGMeCellView.m */,
+				FC1D0AB61C0C133A00F1F889 /* MGMeCountCell.h */,
+				FC1D0AB71C0C133A00F1F889 /* MGMeCountCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -727,6 +795,9 @@
 		FC624FC41BF9C09B00F1E92D /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				FC1D0AA51C0BECD100F1F889 /* JMStaticContentTableViewController */,
+				FCF17DCA1C06E76A00810113 /* Tool */,
+				FCF17DB21C06DA7C00810113 /* MutilImagePicker */,
 				FC20D26B1BFEE22E00E93682 /* MBProgressHUD */,
 				FC20D2711BFEE22E00E93682 /* MJExtension */,
 				FC20D2851BFEE22E00E93682 /* MJRefresh */,
@@ -835,6 +906,39 @@
 				FC6C48101BEA032200E61377 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FCF17DB21C06DA7C00810113 /* MutilImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				FCF17DB31C06DA7C00810113 /* UzysAssetPickerController.bundle */,
+				FCF17DB41C06DA7C00810113 /* UzysAssetsPickerController.h */,
+				FCF17DB51C06DA7C00810113 /* UzysAssetsPickerController.m */,
+				FCF17DB61C06DA7C00810113 /* UzysAssetsPickerController.xib */,
+				FCF17DB71C06DA7C00810113 /* UzysAssetsPickerController_Configuration.h */,
+				FCF17DB81C06DA7C00810113 /* UzysAssetsViewCell.h */,
+				FCF17DB91C06DA7C00810113 /* UzysAssetsViewCell.m */,
+				FCF17DBA1C06DA7C00810113 /* UzysGroupPickerView.h */,
+				FCF17DBB1C06DA7C00810113 /* UzysGroupPickerView.m */,
+				FCF17DBC1C06DA7C00810113 /* UzysGroupPickerViewController.h */,
+				FCF17DBD1C06DA7C00810113 /* UzysGroupPickerViewController.m */,
+				FCF17DBE1C06DA7C00810113 /* UzysGroupViewCell.h */,
+				FCF17DBF1C06DA7C00810113 /* UzysGroupViewCell.m */,
+				FCF17DC01C06DA7C00810113 /* UzysWrapperPickerController.h */,
+				FCF17DC11C06DA7C00810113 /* UzysWrapperPickerController.m */,
+			);
+			path = MutilImagePicker;
+			sourceTree = "<group>";
+		};
+		FCF17DCA1C06E76A00810113 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				FCF17DCB1C06E77900810113 /* HttpTool.h */,
+				FCF17DCC1C06E77900810113 /* HttpTool.m */,
+				FCF17DCE1C06EA5900810113 /* BinaryData.h */,
+				FCF17DCF1C06EA5900810113 /* BinaryData.m */,
+			);
+			path = Tool;
 			sourceTree = "<group>";
 		};
 		FCF4DC391C04449D00D252ED /* Compose */ = {
@@ -954,6 +1058,8 @@
 			files = (
 				FC20D2591BFEC83D00E93682 /* MJPhotoBrowser.bundle in Resources */,
 				FC6C481C1BEA0F4C00E61377 /* Default@2x.png in Resources */,
+				FCF17DC41C06DA7C00810113 /* UzysAssetsPickerController.xib in Resources */,
+				FCF17DC21C06DA7C00810113 /* UzysAssetPickerController.bundle in Resources */,
 				FC20D2BA1BFEE22E00E93682 /* MJRefresh.bundle in Resources */,
 				FC6C48011BEA032200E61377 /* Main.storyboard in Resources */,
 				FC6C48061BEA032200E61377 /* LaunchScreen.xib in Resources */,
@@ -978,6 +1084,8 @@
 			files = (
 				FC20D2C61BFEE22E00E93682 /* SDWebImageManager.m in Sources */,
 				FC20D2C71BFEE22E00E93682 /* SDWebImagePrefetcher.m in Sources */,
+				FCF17DD01C06EA5900810113 /* BinaryData.m in Sources */,
+				FCF17DC91C06DA7C00810113 /* UzysWrapperPickerController.m in Sources */,
 				FC624FD61BF9C09B00F1E92D /* MGMeController.m in Sources */,
 				FC624FD31BF9C09B00F1E92D /* MGTabBar.m in Sources */,
 				FC20D25B1BFEC83D00E93682 /* MJPhotoLoadingView.m in Sources */,
@@ -985,9 +1093,14 @@
 				FC20D2C01BFEE22E00E93682 /* NSData+ImageContentType.m in Sources */,
 				FC20D2B11BFEE22E00E93682 /* MJArgument.m in Sources */,
 				FC20D25D1BFEC83D00E93682 /* MJPhotoToolbar.m in Sources */,
+				FCF17DC81C06DA7C00810113 /* UzysGroupViewCell.m in Sources */,
+				FC1D0AB11C0BECD100F1F889 /* JMStaticContentTableViewSection.m in Sources */,
 				FC624FDF1BF9C09B00F1E92D /* main.m in Sources */,
+				FC1D0AB21C0BECD100F1F889 /* StaticTextFieldTableViewCell.m in Sources */,
 				FC20D2B91BFEE22E00E93682 /* NSObject+MJMember.m in Sources */,
 				FC624FFC1BF9C90500F1E92D /* AFURLConnectionOperation.m in Sources */,
+				FCF17DC71C06DA7C00810113 /* UzysGroupPickerViewController.m in Sources */,
+				FC1D0AB01C0BECD100F1F889 /* JMStaticContentTableViewController.m in Sources */,
 				FC624FFB1BF9C90500F1E92D /* AFSecurityPolicy.m in Sources */,
 				FC65C68B1BFC510300C03234 /* NSDate+MG.m in Sources */,
 				FC20D2B21BFEE22E00E93682 /* MJIvar.m in Sources */,
@@ -995,12 +1108,15 @@
 				FCFBFE851BFAC6E400ABF6C5 /* User.m in Sources */,
 				FC20D2CA1BFEE22E00E93682 /* UIImage+MultiFormat.m in Sources */,
 				FCB3279A1BFD6D3A003C169A /* MGStatusView.m in Sources */,
+				FCF17DC61C06DA7C00810113 /* UzysGroupPickerView.m in Sources */,
 				FC20D2C91BFEE22E00E93682 /* UIImage+GIF.m in Sources */,
 				FC20D2C31BFEE22E00E93682 /* SDWebImageDecoder.m in Sources */,
 				FC624FCE1BF9C09B00F1E92D /* MGHomeController.m in Sources */,
 				FC20D2C21BFEE22E00E93682 /* SDWebImageCompat.m in Sources */,
 				FC624FF91BF9C90500F1E92D /* AFHTTPSessionManager.m in Sources */,
+				FC1D0AB81C0C133A00F1F889 /* MGMeCountCell.m in Sources */,
 				FCA08D651BFDC21B00B11230 /* Photo.m in Sources */,
+				FC1D0AAF1C0BECD100F1F889 /* JMStaticContentTableViewCell.m in Sources */,
 				FC624FD11BF9C09B00F1E92D /* MGBadgeView.m in Sources */,
 				FCCD84331C0539BB0023CCC1 /* MGComposeToolBar.m in Sources */,
 				FC20D25E1BFEC83D00E93682 /* MJPhotoView.m in Sources */,
@@ -1009,6 +1125,7 @@
 				FC20D2B61BFEE22E00E93682 /* MJTypeEncoding.m in Sources */,
 				FC20D2B31BFEE22E00E93682 /* MJMember.m in Sources */,
 				FC20D2BB1BFEE22E00E93682 /* MJRefreshBaseView.m in Sources */,
+				FC1D0AB51C0BFD3400F1F889 /* MGMeCellView.m in Sources */,
 				FC20D2CC1BFEE22E00E93682 /* UIImageView+WebCache.m in Sources */,
 				FC20D2BC1BFEE22E00E93682 /* MJRefreshConst.m in Sources */,
 				FC624FDD1BF9C09B00F1E92D /* UIBarButtonItem+MG.m in Sources */,
@@ -1031,6 +1148,8 @@
 				FC20D25A1BFEC83D00E93682 /* MJPhotoBrowser.m in Sources */,
 				FC20D2C81BFEE22E00E93682 /* UIButton+WebCache.m in Sources */,
 				FCF4DC3D1C0444C600D252ED /* ComposeController.m in Sources */,
+				FCF17DC51C06DA7C00810113 /* UzysAssetsViewCell.m in Sources */,
+				FCF17DC31C06DA7C00810113 /* UzysAssetsPickerController.m in Sources */,
 				FC20D2CB1BFEE22E00E93682 /* UIImage+WebP.m in Sources */,
 				FC20D2B01BFEE22E00E93682 /* MBProgressHUD.m in Sources */,
 				FC20D2491BFEAE8E00E93682 /* MGPhotosView.m in Sources */,
@@ -1059,6 +1178,7 @@
 				FC65C68E1BFC699900C03234 /* MGStatusToolBar.m in Sources */,
 				FC20D2B51BFEE22E00E93682 /* MJType.m in Sources */,
 				FC49A52E1BFD5D2A00DE4E15 /* MGStatusRetweetView.m in Sources */,
+				FCF17DCD1C06E77900810113 /* HttpTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1136,7 +1256,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1173,7 +1293,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

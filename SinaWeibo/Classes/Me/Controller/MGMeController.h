@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JMStaticContentTableViewController.h"
 
-@interface MGMeController : UITableViewController
+@interface MGMeController : JMStaticContentTableViewController
 
 @end

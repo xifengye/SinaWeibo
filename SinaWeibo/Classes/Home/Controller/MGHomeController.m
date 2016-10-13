@@ -9,7 +9,6 @@
 #import "MGHomeController.h"
 #import "UIBarButtonItem+MG.h"
 #import "MGTitleButton.h"
-#import "AFNetworking.h"
 #import "MGAccountTool.h"
 #import "UIImageView+WebCache.h"
 #import "Status.h"
@@ -20,6 +19,7 @@
 #import "MJRefresh.h"
 #import "MGAccount.h"
 #import "MGAccountTool.h"
+#import "HttpTool.h"
 
 
 typedef NS_ENUM(NSInteger, UITableDragWhere) {
@@ -61,17 +61,15 @@ typedef NS_ENUM(NSInteger, UITableDragWhere) {
  加载用户信息
  */
 -(void)setupInfo{
-    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     MGAccount* account = [MGAccountTool getAccount];
     NSString* url = [ NSString stringWithFormat:@"https://api.weibo.com/2/users/show.json?access_token=%@&uid=%lld",account.access_token,account.uid];
-    [manager GET:url parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        User* user = [User objectWithKeyValues:responseObject];
+    [HttpTool GET:url params:nil success:^(id response) {
+        User* user = [User objectWithKeyValues:response];
         MGTitleButton* titleView = self.navigationItem.titleView;
         [titleView setTitle:user.name forState:UIControlStateNormal];
-        NSLog(@"加载当前用户信息成功:%@",user);
-    } failure:^(AFHTTPRequestOperation * _Nullable operation, NSError * _Nonnull error) {
-        NSLog(@"加载当前用户信息失败");
-    }];
+    } failure:^(NSError *error) {
+        
+    } progressText:nil successToast:nil failureToast:nil];
 }
 
 -(void)setupTableView{
@@ -131,9 +129,8 @@ typedef NS_ENUM(NSInteger, UITableDragWhere) {
         StatusFrame* s = [self.statuesFrame lastObject];
         params[@"max_id"]=s.status.idstr;
     }
-    AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url parameters:params success:^(AFHTTPRequestOperation * operation, id response) {
-//        NSLog(@"success   %@",response);
+    
+    [HttpTool GET:url params:params success:^(id response) {
         NSArray* arr = response[@"statuses"];
         NSArray* statusArray = [Status objectArrayWithKeyValuesArray:arr];
         NSMutableArray* statusFrameArray = [NSMutableArray array];
@@ -157,16 +154,15 @@ typedef NS_ENUM(NSInteger, UITableDragWhere) {
             
         }
         [self.tableView reloadData];
-        
-      } failure:^(AFHTTPRequestOperation * operation , NSError * error) {
-//        NSLog(@"error   %@",error);
+    } failure:^(NSError *error) {
         if([self.headerView isRefreshing]){
             [self.headerView endRefreshing];
         }
         if([self.footerView isRefreshing]){
             [self.footerView endRefreshing];
         }
-    }];
+
+    } progressText:nil successToast:nil failureToast:nil];
 }
 
 -(void)toastRefreshResult:(int)newCount{
